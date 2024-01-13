@@ -8,12 +8,12 @@ import { SignupPage } from "./pages/signup";
 const router = new Navigo("/");
 
 
-declare global{
-  interface window {
-    navigate:(_:string)=>void;
-  }
-}
- window.navigate = (route: string) => {
+// declare global{
+//   interface window {
+//     navigate:(_:string)=>void;
+//   }
+// }
+ (window as any).navigate = (route: string) => {
   router.navigate(route);
 };
 
@@ -27,7 +27,7 @@ router.on("/", function () {
   render(startPage(router));
 });
 router.on("startonboarding", function () {
-  render(startonboarding());
+  render(startonboarding(router));
 });
 router.on("onboarding", function () {
   render(onBoarding());
