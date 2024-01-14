@@ -1,9 +1,4 @@
-import Navigo from "navigo"
-
-export const LoginPage=(router:Navigo)=>{
-  (window as any).goToSignupPage=()=>{
-    router.navigate("signup")
-}
+export const LoginPage=()=>{
     return`
     <div class="flex items-center justify-center p-24">
   <svg width="54" height="81" viewBox="0 0 54 81" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +52,7 @@ export const LoginPage=(router:Navigo)=>{
       <i class="bi bi-eye-slash" id="eye"></i>
       </button>
     </div>
-    <button onclick="goToSignupPage()" class="absolute left-48 font-bold text-center flex justify-center items-center cursor-pointer hover:underline"
+    <button onclick="navigate("/signup")" class="absolute left-48 font-bold text-center flex justify-center items-center cursor-pointer hover:underline"
     >
     Sign Up
     </button>
