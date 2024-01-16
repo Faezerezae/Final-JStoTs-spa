@@ -8,12 +8,14 @@ declare global {
   interface Window {
     handleLogin: () => Promise<void>;
     loginNotificationClose: () => void;
-    togglePasswordVisibility: () => void;
+    togglePasswordVisibilityLogin: () => void;
   }
 }
 
-window.togglePasswordVisibility = () => {
-  const passwordInput = document.getElementById("signup-form-password") as HTMLInputElement;
+window.togglePasswordVisibilityLogin = () => {
+  const passwordInput = document.getElementById(
+    "login-form-password",
+  ) as HTMLInputElement;
   const eye = document.getElementById("eye");
 
   if (passwordInput.type === "password") {
@@ -25,14 +27,14 @@ window.togglePasswordVisibility = () => {
     eye?.classList.remove("bi-eye");
     eye?.classList.add("bi-eye-slash");
   }
-}
+};
 
 window.handleLogin = async () => {
   const usernameInput = <HTMLInputElement>(
-    document.getElementById("signup-form-username")
+    document.getElementById("login-form-username")
   );
   const passwordInput = <HTMLInputElement>(
-    document.getElementById("signup-form-password")
+    document.getElementById("login-form-password")
   );
 
   const body: ISignupBody = {
@@ -52,21 +54,18 @@ window.handleLogin = async () => {
         ErrorToast({
           errorsList: (<any>err.response?.data).message || [],
           closeFunctionName: "loginNotificationClose",
-        })
-      )
+        }),
+      ),
     );
   }
 };
-
 
 window.loginNotificationClose = () => {
   render(LoginPage());
 };
 
-
-
-export const LoginPage=(notifElement?: string)=>{
-    return`
+export const LoginPage = (notifElement?: string) => {
+  return `
     ${notifElement || ""}
     <div class="w-5 p-4">
   <button onclick="navigate('/signup')">
@@ -95,7 +94,7 @@ export const LoginPage=(notifElement?: string)=>{
       <input
       type="text"
       name="username"
-      id="signup-form-username"
+      id="login-form-username"
       class="bg-gray-50 border border-transparent text-sm rounded-lg focus:ring-black focus:border-black block w-full ps-10 p-2.5"
       placeholder="Username"
       required
@@ -113,7 +112,7 @@ export const LoginPage=(notifElement?: string)=>{
       <input
       type="password"
       name="password"
-      id="signup-form-password"
+      id="login-form-password"
       placeholder="Password"
       required
       class="bg-gray-50 border border-transparent text-sm rounded-lg focus:ring-black focus:border-black block w-full ps-10 p-2.5"
@@ -121,7 +120,7 @@ export const LoginPage=(notifElement?: string)=>{
       <button
         type="button"
         class="show-password absolute inset-y-0 end-0 flex items-center pe-3.5 cursor-pointer z-40"
-        onclick="window.togglePasswordVisibility()"
+        onclick="window.togglePasswordVisibilityLogin()"
       >
       <i class="bi bi-eye-slash" id="eye"></i>
       </button>
@@ -140,5 +139,5 @@ export const LoginPage=(notifElement?: string)=>{
     </button>
 </div>
 
-    `
-}
+    `;
+};

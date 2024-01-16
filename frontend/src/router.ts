@@ -4,7 +4,8 @@ import { startonboarding } from "./pages/startOnboarding";
 import { LoginPage } from "./pages/login";
 import { SignupPage } from "./pages/signup";
 import { Carousel } from "./pages/carousel";
-import { SneakersList } from "./pages/sneakers";
+import { SneakersPage } from "./pages/sneakers";
+import { InformationSneaker } from "./pages/informationSneaker";
 
 
 export function render(context: string) {
@@ -43,8 +44,16 @@ router.on("/login", function () {
   render(LoginPage());
 });
 
-router.on("/sneakers", function () {
-  render(SneakersList());
+router.on("/sneakers", async function (params) {
+  console.log("params", params);
+  render(await SneakersPage(params));
 });
+
+
+router.on("/sneakers/:id", async function (params) {
+  render(await InformationSneaker(Number(params?.data?.id)))
+});
+
+
 
 router.resolve();
